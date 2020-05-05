@@ -22,7 +22,7 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
     
     private DefaultTableModel dtmTabUsuarios = new DefaultTableModel();
     
-    private int saltarMensaxes; // nº de rexistros a saltarse na búsqueda
+    private int saltarUsuarios; // nº de rexistros a saltarse na búsqueda
         
     /**
      * Creates new form FrmBuscarUsuarios
@@ -93,9 +93,19 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
 
         btnAnterior.setText("<<");
         btnAnterior.setEnabled(false);
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorActionPerformed(evt);
+            }
+        });
 
         btnPosterior.setText(">>");
         btnPosterior.setEnabled(false);
+        btnPosterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPosteriorActionPerformed(evt);
+            }
+        });
 
         btnSeguir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnSeguir.setText("Seguir a usuario/a seleccionado/a");
@@ -162,11 +172,19 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
 
     
     private void btnBuscar_click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar_click
+        // inicialmente non saltamos ningún usuario
+        saltarUsuarios = 0;
+        buscarUsuarios();
+    
+                       
+    }//GEN-LAST:event_btnBuscar_click
 
+private void buscarUsuarios() {
+    
         ArrayList<Usuario> usuarios = new ArrayList<>();
         
         // obtemos a listaxe de usuarios que superan o filtro        
-        usuarios = FrmLog.db.getUsuarios(saltarMensaxes, 5, txtBuscar.getText());
+        usuarios = FrmLog.db.getUsuarios(saltarUsuarios, 5, txtBuscar.getText());
         
         Object[] fila = new Object[2];
         dtmTabUsuarios.setRowCount(0);
@@ -184,7 +202,7 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         tabUsuarios.setModel(dtmTabUsuarios);
         
         // comprobamos se habilitamos o botón de ir cara atrás na listaxe
-        if (saltarMensaxes == 0) {
+        if (saltarUsuarios == 0) {
             // estamos ao comezo da listaxe. Non permitimos ir a usuarios anteriores
             btnAnterior.setEnabled(false);
         } else {
@@ -209,9 +227,9 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         }
                 
         usuarios = null;
-                       
-    }//GEN-LAST:event_btnBuscar_click
-
+        
+}    
+    
     
     private void btnSeguir_click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguir_click
         
@@ -237,6 +255,18 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_btnSeguir_click
+
+    private void btnPosteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPosteriorActionPerformed
+        // para ir a usuarios posteriores, engadimos 5 ao número de usuarios a saltar
+        saltarUsuarios += 5;
+        buscarUsuarios();
+    }//GEN-LAST:event_btnPosteriorActionPerformed
+
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+        // para ir a usuarios anteriores, restamos 5 ao número de usuarios a saltar
+        saltarUsuarios -= 5;
+        buscarUsuarios();
+    }//GEN-LAST:event_btnAnteriorActionPerformed
 
     // Método para engadir o usuario seleccionado á listaxe de usuarios que sigo
     private void seguirUsuario(String usuarioSeleccionado) {

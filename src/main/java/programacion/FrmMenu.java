@@ -99,7 +99,7 @@ public class FrmMenu extends javax.swing.JDialog {
         });
 
         btnBuscarUsuarios.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnBuscarUsuarios.setText("Busar USUARIOS");
+        btnBuscarUsuarios.setText("Buscar USUARIOS");
         btnBuscarUsuarios.setToolTipText("");
         btnBuscarUsuarios.setActionCommand("btnBuscarUsuarios");
         btnBuscarUsuarios.setName("btnBuscarUsuarios"); // NOI18N
