@@ -95,7 +95,7 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         btnAnterior.setEnabled(false);
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnteriorActionPerformed(evt);
+                btnAnterior_click(evt);
             }
         });
 
@@ -103,7 +103,7 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         btnPosterior.setEnabled(false);
         btnPosterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPosteriorActionPerformed(evt);
+                btnPosterior_click(evt);
             }
         });
 
@@ -256,17 +256,17 @@ private void buscarUsuarios() {
         
     }//GEN-LAST:event_btnSeguir_click
 
-    private void btnPosteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPosteriorActionPerformed
+    private void btnPosterior_click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPosterior_click
         // para ir a usuarios posteriores, engadimos 5 ao número de usuarios a saltar
         saltarUsuarios += 5;
         buscarUsuarios();
-    }//GEN-LAST:event_btnPosteriorActionPerformed
+    }//GEN-LAST:event_btnPosterior_click
 
-    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+    private void btnAnterior_click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnterior_click
         // para ir a usuarios anteriores, restamos 5 ao número de usuarios a saltar
         saltarUsuarios -= 5;
         buscarUsuarios();
-    }//GEN-LAST:event_btnAnteriorActionPerformed
+    }//GEN-LAST:event_btnAnterior_click
 
     // Método para engadir o usuario seleccionado á listaxe de usuarios que sigo
     private void seguirUsuario(String usuarioSeleccionado) {
