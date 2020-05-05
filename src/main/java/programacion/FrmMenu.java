@@ -16,7 +16,6 @@ import Clases.Usuario;
 public class FrmMenu extends javax.swing.JDialog {
 
     protected static Usuario usuario;
-    private BaseDatos db;
     
     /**
      * Creates new form FrmMenu
@@ -24,8 +23,7 @@ public class FrmMenu extends javax.swing.JDialog {
     public FrmMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        db = new BaseDatos();
-        usuario = db.getUsuario(FrmLog.nickUsuario);
+        usuario = FrmLog.db.getUsuario(FrmLog.nickUsuario);
     }
 
     private void verMensaxes(String opcion) {
@@ -52,11 +50,6 @@ public class FrmMenu extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -183,7 +176,7 @@ public class FrmMenu extends javax.swing.JDialog {
 
     private void btnVerMensaxesUsuarios_click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerMensaxesUsuarios_click
         // actualizamos información do usuario por se modificou a quen segue
-        usuario = db.getUsuario(FrmLog.nickUsuario);
+        usuario = FrmLog.db.getUsuario(FrmLog.nickUsuario);
         
         // ver mensaxes de usuarios que sigo
         verMensaxes("U");
@@ -211,10 +204,6 @@ public class FrmMenu extends javax.swing.JDialog {
     private void btnCancelar_click(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar_click
         this.dispose();
     }//GEN-LAST:event_btnCancelar_click
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        //db.pechar();
-    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

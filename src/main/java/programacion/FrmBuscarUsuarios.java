@@ -5,7 +5,6 @@
  */
 package programacion;
 
-import Clases.BaseDatos;
 import Clases.Usuario;
 import java.util.ArrayList;
 import java.util.TreeSet;
@@ -24,9 +23,7 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
     private DefaultTableModel dtmTabUsuarios = new DefaultTableModel();
     
     private int saltarMensaxes; // nº de rexistros a saltarse na búsqueda
-    
-    private BaseDatos db;    
-    
+        
     /**
      * Creates new form FrmBuscarUsuarios
      */
@@ -34,7 +31,6 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setModeloTaboa();
-        db = new BaseDatos();
     }
     
     // Método para asignar modelo á táboa de usuarios
@@ -65,11 +61,6 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         btnSeguir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -175,7 +166,7 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         
         // obtemos a listaxe de usuarios que superan o filtro        
-        usuarios = db.getUsuarios(saltarMensaxes, 5, txtBuscar.getText());
+        usuarios = FrmLog.db.getUsuarios(saltarMensaxes, 5, txtBuscar.getText());
         
         Object[] fila = new Object[2];
         dtmTabUsuarios.setRowCount(0);
@@ -247,17 +238,13 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnSeguir_click
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        //db.pechar();        
-    }//GEN-LAST:event_formWindowClosing
-
     // Método para engadir o usuario seleccionado á listaxe de usuarios que sigo
     private void seguirUsuario(String usuarioSeleccionado) {
         
         // para non repetir usuarios, usamos un treeset
         
         TreeSet<String> arboreSeguir = new TreeSet();
-        Usuario u = db.getUsuario(FrmMenu.usuario.getUsuario());
+        Usuario u = FrmLog.db.getUsuario(FrmMenu.usuario.getUsuario());
         
         // engadimos ao treeset os usuarios actuais
         for (int i=0; i<u.getSegueA().size(); i++) {
@@ -274,7 +261,7 @@ public class FrmBuscarUsuarios extends javax.swing.JDialog {
             }
         }
         
-        db.actualizarUsuariosSegueA(u.getUsuario(), arr);
+        FrmLog.db.actualizarUsuariosSegueA(u.getUsuario(), arr);
         JOptionPane.showMessageDialog(rootPane,"Rexistrado o/a novo/a as seguir.",ATENCION,HEIGHT);
         
     }

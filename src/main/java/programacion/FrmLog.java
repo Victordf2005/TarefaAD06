@@ -18,7 +18,7 @@ public class FrmLog extends javax.swing.JDialog {
     public static final String ATENCION = "ATENCION!!!";
     protected static String nickUsuario;
         
-    private BaseDatos db;
+    protected static BaseDatos db;
     
     /**
      * Creates new form FrmRexistro2
@@ -170,7 +170,7 @@ public class FrmLog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelar_click
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        //db.pechar();
+        db.pechar();
     }//GEN-LAST:event_formWindowClosing
 
     /**

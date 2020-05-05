@@ -5,7 +5,6 @@
  */
 package programacion;
 
-import Clases.BaseDatos;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,14 +17,12 @@ import javax.swing.JOptionPane;
  */
 public class FrmEscribirMensaxe extends javax.swing.JDialog {
 
-    private BaseDatos db;
     /**
      * Creates new form FrmEscribirMensaxe
      */
     public FrmEscribirMensaxe(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        db = new BaseDatos();
     }
 
     /**
@@ -111,8 +108,9 @@ public class FrmEscribirMensaxe extends javax.swing.JDialog {
             
         } else {
             
-            db.enviarMensaxe(txtMensaxe.getText(), FrmMenu.usuario.getNome(), FrmMenu.usuario.getUsuario(), extraerHashtags());
+            FrmLog.db.enviarMensaxe(txtMensaxe.getText(), FrmMenu.usuario.getNome(), FrmMenu.usuario.getUsuario(), extraerHashtags());
             JOptionPane.showMessageDialog(rootPane, "Mensaxe enviada correctamente.", FrmInicial.ATENCION, HEIGHT);
+            
             // borramos a caixa para que poida teclear unha nova mensaxe
             txtMensaxe.setText("");
             

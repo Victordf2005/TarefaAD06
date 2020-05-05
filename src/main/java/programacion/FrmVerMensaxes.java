@@ -18,7 +18,6 @@ public class FrmVerMensaxes extends javax.swing.JDialog {
 
     private String opcionVistaMensaxes;
     private int saltarMensaxes;
-    private BaseDatos db;
     
     private DefaultTableModel dtmTabMensaxes = new DefaultTableModel();
     
@@ -31,7 +30,6 @@ public class FrmVerMensaxes extends javax.swing.JDialog {
         this.opcionVistaMensaxes = opcion;
         setModeloTaboa();
         saltarMensaxes = 0;
-        db = new BaseDatos();
         
         // Modificamos o texto das etiquetas dependendo da opción a listar
         // Tamén habilitaremos ou non outros obxectos.
@@ -79,13 +77,13 @@ public class FrmVerMensaxes extends javax.swing.JDialog {
         
         switch (opcionVistaMensaxes) {
             case "T": 
-                mensaxes = db.getMensaxes(saltarMensaxes, 5);
+                mensaxes = FrmLog.db.getMensaxes(saltarMensaxes, 5);
                 break;
             case "U":
-                mensaxes = db.getMensaxesUsuarios(saltarMensaxes, 5, FrmMenu.usuario.getSegueA());
+                mensaxes = FrmLog.db.getMensaxesUsuarios(saltarMensaxes, 5, FrmMenu.usuario.getSegueA());
                 break;
             case "H":
-                mensaxes = db.getMensaxesHashtag(saltarMensaxes, 5, txtBuscar.getText());
+                mensaxes = FrmLog.db.getMensaxesHashtag(saltarMensaxes, 5, txtBuscar.getText());
     }
         
         Object[] fila = new Object[4];
@@ -143,11 +141,6 @@ public class FrmVerMensaxes extends javax.swing.JDialog {
         btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         tabMensaxes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tabMensaxes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -267,10 +260,6 @@ public class FrmVerMensaxes extends javax.swing.JDialog {
         saltarMensaxes=0;
         buscarMensaxes();
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        //db.pechar();
-    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

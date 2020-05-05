@@ -29,6 +29,7 @@ public class BaseDatos {
     private static final String C_USUARIO = "usuario";  // Nome da colección "usuario"
     private static final String C_MENSAXE = "mensaxe";  // Nome da colección "mensaxe
 
+    private MongoClient mongoClient;
     
     public BaseDatos() {
         cargarConfiguracion();
@@ -37,16 +38,20 @@ public class BaseDatos {
     
     // Método para abrir a conexión coa base de datos
     private  void abrir() {
-                
+        
+        // Cadea de conexión á base de datos local, sen autenticarse
         //MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://" + accesoBBDD.getAddress() + ":" + accesoBBDD.getPort()));
-        /*MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://" + accesoBBDD.getUsername() +":" + accesoBBDD.getPassword() + "@"
-                                                                                  + accesoBBDD.getAddress() + ":" + accesoBBDD.getPort() + 
-                                                                                  "/?authSource=db1&authMechanism=SCRAM-SHA-1"));
-        */
-        MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://" + accesoBBDD.getUsername() +":" + accesoBBDD.getPassword() + "@"
+    
+        // Cadea de conexión á base de datos con autenticación
+        mongoClient = new MongoClient(new MongoClientURI("mongodb://" + accesoBBDD.getUsername() +":" + accesoBBDD.getPassword() + "@"
                                                                                   + accesoBBDD.getAddress() + ":" + accesoBBDD.getPort() + "/" + accesoBBDD.getDbname() + "?retryWrites=false"));
 
         db = mongoClient.getDB(accesoBBDD.getDbname());
+    }
+    
+    // Método para pechar a conexioón coa base de datos
+    public void pechar() {
+        mongoClient.close();
     }
         
     
