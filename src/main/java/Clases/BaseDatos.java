@@ -132,17 +132,17 @@ public class BaseDatos {
     
     // Método que grava unha nova mensaxe
     public  void enviarMensaxe(String texto, String nomeUsuario, String userUsuario, List hashtags) {
-        
-        Date data = new Date();
-        
+                
         DBCollection colMensaxe = db.getCollection(C_MENSAXE);
         
+        Date data = new Date();
+
         DBObject mensaxe = new BasicDBObject()
                 .append("text", texto)
                 .append("user", new BasicDBObject()
                                 .append("nome", nomeUsuario)
                                 .append("username", userUsuario))
-                .append("date", Instant.now().toString())
+                .append("date", new BasicDBObject("date", data))
                 .append("hashtags", hashtags);
         
         colMensaxe.insert(mensaxe);
