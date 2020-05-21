@@ -215,7 +215,7 @@ private void buscarUsuarios() {
             // chegamos ao final da listaxe. Non permitimos ir a usuarios posteriores
             btnPosterior.setEnabled(false);            
             if (usuarios.isEmpty()) {
-                // se non hai usuarios, no permitimos pulsar o botón "seguir"
+                // se non hai usuarios, non permitimos pulsar o botón "seguir"
                 btnSeguir.setEnabled(false);
             } else {
                 // hai usuarios. permitimos pulsar o botón "seguir"
@@ -224,6 +224,7 @@ private void buscarUsuarios() {
         } else {
             // hai máis usuarios, permitimos ir cara adiante.
             btnPosterior.setEnabled(true);
+            btnSeguir.setEnabled(true);
         }
                 
         usuarios = null;
